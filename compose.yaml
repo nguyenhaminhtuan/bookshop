@@ -18,6 +18,20 @@ services:
     env_file:
       - .env
 
+  migration:
+    image: arigaio/atlas:1.2.0-community-distroless
+    working_dir: /db
+    command: migrate apply --env local
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+    volumes:
+      - ./db:/db
+    depends_on:
+      db:
+        condition: service_healthy
+
   redis:
     image: redis:8.4
     ports:
@@ -113,7 +127,7 @@ services:
             "transforms.outbox.table.field.event.type": "event_type",
             "transforms.outbox.table.field.event.key": "aggregate_id",
             "transforms.outbox.table.field.event.payload": "payload",
-            "transforms.outbox.table.fields.additional.placement": "type:header:eventType",
+            "transforms.outbox.table.fields.additional.placement": "type:header:eventType,aggregate_type:header:aggregateType,aggregate_id:header:aggregateId,metadata:header:eventMetadata",
             "transforms.outbox.table.expand.json.payload": "true"
           }'
     env_file:
