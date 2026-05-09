@@ -1,0 +1,25 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "always"
+  },
+  "[javascript][typescript][javascriptreact][typescriptreact][vue]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[html][css][scss]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json][jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[terraform][terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSaveMode": "file"
+  },
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "turbo.useLocalTurbo": true
+}

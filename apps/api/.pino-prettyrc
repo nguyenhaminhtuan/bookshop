@@ -1,0 +1,8 @@
+{
+  "colorize": true,
+  "errorLikeObjectKeys": "err,error",
+  "ignore": "pid,hostname,context,event,method,url,statusCode,responseTime,correlationId",
+  "messageFormat": "{if context}[{context}] {end}{if method}{method} {url}{end}{if statusCode} -> {statusCode}{end}{if responseTime} {responseTime}ms{end}{if msg}{if method} - {end}{msg}{end}{if correlationId} [correlationId={correlationId}]{end}",
+  "singleLine": false,
+  "translateTime": "SYS:yyyy-mm-dd HH:MM:ss.l"
+}

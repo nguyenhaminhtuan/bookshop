@@ -1,0 +1,5 @@
+node 24.15
+atlas-community 1.2
+terraform 1.15
+prek 0.3.13
+direnv latest
