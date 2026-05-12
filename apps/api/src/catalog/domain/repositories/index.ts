@@ -1,0 +1,6 @@
+export * from './author.repository.js'
+export * from './book.repository.js'
+export * from './category.repository.js'
+export * from './distributor.repository.js'
+export * from './publisher.repository.js'
+export * from './tag.repository.js'

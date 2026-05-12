@@ -1,0 +1,7 @@
+export * from './author.dto.js'
+export * from './book.dto.js'
+export * from './category.dto.js'
+export * from './create-book.dto.js'
+export * from './distributor.dto.js'
+export * from './publisher.dto.js'
+export * from './tag.dto.js'

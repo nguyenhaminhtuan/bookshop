@@ -1,0 +1,6 @@
+export * from './author.mikro-repository.js'
+export * from './book.mikro-repository.js'
+export * from './category.mikro-repository.js'
+export * from './distributor.mikro-repository.js'
+export * from './publisher.mikro-repository.js'
+export * from './tag.mikro-repository.js'

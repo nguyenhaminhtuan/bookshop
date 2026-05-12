@@ -1,0 +1,6 @@
+export * from './author.aggregate.js'
+export * from './book.aggregate.js'
+export * from './category.aggregate.js'
+export * from './distributor.aggregate.js'
+export * from './publisher.aggregate.js'
+export * from './tag.aggregate.js'

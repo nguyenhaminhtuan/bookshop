@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import '@total-typescript/ts-reset'
 import { Logger as NestLogger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { Transport } from '@nestjs/microservices'
@@ -6,6 +7,7 @@ import type { NestExpressApplication } from '@nestjs/platform-express'
 import { Logger } from 'nestjs-pino'
 
 import { AppModule } from './app.module.js'
+import { HttpExceptionFilter } from './shared/filters/index.js'
 
 async function bootstrap() {
   const logger = new NestLogger(bootstrap.name)
@@ -23,6 +25,8 @@ async function bootstrap() {
   app.enableCors({
     origin: isLocal ? '*' : [],
   })
+
+  app.useGlobalFilters(new HttpExceptionFilter())
 
   app.connectMicroservice({
     transport: Transport.KAFKA,

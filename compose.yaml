@@ -114,8 +114,8 @@ services:
             "database.dbname": "${DB_DBNAME}",
             "topic.prefix": "${DB_DBNAME}",
             "plugin.name": "pgoutput",
-            "schema.include.list": "events",
-            "table.include.list": "events.outbox",
+            "schema.include.list": "outbox",
+            "table.include.list": "outbox.events",
             "slot.name": "bookshop_outbox_slot",
             "include.schema.changes": "false",
             "tombstones.on.delete": "false",
@@ -124,7 +124,7 @@ services:
             "transforms.outbox.route.by.field": "aggregate_type",
             "transforms.outbox.route.topic.replacement": "bookshop.$${routedByValue}",
             "transforms.outbox.table.field.event.id": "id",
-            "transforms.outbox.table.field.event.type": "event_type",
+            "transforms.outbox.table.field.event.type": "type",
             "transforms.outbox.table.field.event.key": "aggregate_id",
             "transforms.outbox.table.field.event.payload": "payload",
             "transforms.outbox.table.fields.additional.placement": "type:header:eventType,aggregate_type:header:aggregateType,aggregate_id:header:aggregateId,metadata:header:eventMetadata",
@@ -132,6 +132,15 @@ services:
           }'
     env_file:
       - .env
+
+  kafbat-ui:
+    container_name: kafbat-ui
+    image: ghcr.io/kafbat/kafka-ui:latest
+    ports:
+      - 8080:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+      SWAGGER_UI_ENABLED: 'true'
 
 volumes:
   db_data:

@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/turbo/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true,
+      "interruptible": true,
+      "env": ["DB_HOST", "DB_PORT", "DB_USER", "DB_PASSWORD", "DB_DBNAME"]
+    }
+  }
+}
