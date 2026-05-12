@@ -1,5 +1,6 @@
 export * from './author.service.js'
 export * from './book-query.service.js'
+export * from './book-stats.service.js'
 export * from './book.service.js'
 export * from './category.service.js'
 export * from './distributor.service.js'

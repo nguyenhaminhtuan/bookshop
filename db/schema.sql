@@ -12,6 +12,14 @@ CREATE TABLE "outbox"."events" (
   PRIMARY KEY ("id")
 );
 
+CREATE TABLE "outbox"."processed_events" (
+  "event_id"     uuid NOT NULL,
+  "handler_name" text NOT NULL,
+  "processed_at" timestamp NOT NULL DEFAULT now(),
+
+  PRIMARY KEY ("event_id", "handler_name")
+);
+
 CREATE SCHEMA IF NOT EXISTS "catalog";
 
 CREATE TABLE "catalog"."publishers" (

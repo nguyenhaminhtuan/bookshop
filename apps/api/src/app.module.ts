@@ -4,6 +4,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs'
 import { PostgreSqlDriver, UnderscoreNamingStrategy } from '@mikro-orm/postgresql'
 import { Module } from '@nestjs/common'
 import { CqrsModule } from '@nestjs/cqrs'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 import { LoggerModule } from 'nestjs-pino'
 
 import { AuthModule } from '#auth/auth.module.js'
@@ -32,6 +33,7 @@ import { ShippingModule } from '#shipping/shipping.module.js'
     ReviewModule,
     ShippingModule,
     CqrsModule.forRoot(),
+    EventEmitterModule.forRoot(),
     LoggerModule.forRoot({
       pinoHttp: {
         autoLogging: process.env.NODE_ENV === undefined,

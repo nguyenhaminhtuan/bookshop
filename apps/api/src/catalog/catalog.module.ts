@@ -6,14 +6,24 @@ import {
   CqrsDomainEventDispatcher,
   DOMAIN_EVENT_DISPATCHER,
 } from '#shared/domain-event-dispatcher.js'
+import {
+  PROCESSED_EVENT_REPOSITORY,
+  ProcessedEvent,
+  ProcessedEventMikroRepository,
+} from '#shared/inbox/index.js'
 import { OUTBOX_REPOSITORY, OutboxEvent, OutboxMikroRepository } from '#shared/outbox/index.js'
 
 import { CatalogIntegrationEventMapper } from './application/catalog-integration-event.mapper.js'
+import {
+  OrderCompletedHandler,
+  ReviewUserRatedHandler,
+} from './application/event-handlers/index.js'
 import { BOOK_READ_REPOSITORY } from './application/read-models/index.js'
 import {
   AuthorCommandService,
   BookCommandService,
   BookQueryService,
+  BookStatsService,
   CategoryCommandService,
   DistributorCommandService,
   PublisherCommandService,
@@ -54,11 +64,13 @@ import {
   StorefrontController,
   TagAdminController,
 } from './presentation/controllers/index.js'
+import { CatalogConsumer } from './presentation/messaging/index.js'
 
 @Module({
   imports: [
     MikroOrmModule.forFeature([
       OutboxEvent,
+      ProcessedEvent,
       AuthorEntity,
       BookEntity,
       BookStatsEntity,
@@ -99,15 +111,19 @@ import {
     { provide: PUBLISHER_REPOSITORY, useClass: PublisherMikroRepository },
     { provide: TAG_REPOSITORY, useClass: TagMikroRepository },
     { provide: OUTBOX_REPOSITORY, useClass: OutboxMikroRepository },
+    { provide: PROCESSED_EVENT_REPOSITORY, useClass: ProcessedEventMikroRepository },
     { provide: DOMAIN_EVENT_DISPATCHER, useClass: CqrsDomainEventDispatcher },
     AuthorCommandService,
     BookCommandService,
     BookQueryService,
+    BookStatsService,
     CategoryCommandService,
     DistributorCommandService,
     PublisherCommandService,
     TagCommandService,
     CatalogIntegrationEventMapper,
+    OrderCompletedHandler,
+    ReviewUserRatedHandler,
   ],
   controllers: [
     AuthorAdminController,
@@ -117,6 +133,7 @@ import {
     DistributorAdminController,
     PublisherAdminController,
     TagAdminController,
+    CatalogConsumer,
   ],
 })
 export class CatalogModule implements OnModuleInit, OnModuleDestroy {
