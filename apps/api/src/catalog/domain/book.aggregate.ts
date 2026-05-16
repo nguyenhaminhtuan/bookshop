@@ -297,7 +297,7 @@ export class Book extends AggregateRoot<BookId> {
   addTags(props: { tagIds: TagId[] }) {
     const currentTagIds = this._tagIds.map((tagId) => tagId.value)
     const newAddedTagIds = props.tagIds.map((tagId) => tagId.value)
-    const newTagIds = new Set(...currentTagIds, ...newAddedTagIds)
+    const newTagIds = new Set([...currentTagIds, ...newAddedTagIds])
     this._tagIds = [...newTagIds].map((tagId) => TagId.from(tagId))
     this._updatedAt = new Date()
   }
@@ -305,7 +305,7 @@ export class Book extends AggregateRoot<BookId> {
   removeTags(props: { tagIds: TagId[] }) {
     const currentTagIds = this._tagIds.map((tagId) => tagId.value)
     const removedTagIds = props.tagIds.map((tagId) => tagId.value)
-    const newTagIds = new Set(...currentTagIds).difference(new Set(...removedTagIds))
+    const newTagIds = new Set(currentTagIds).difference(new Set(removedTagIds))
     this._tagIds = [...newTagIds].map((tagId) => TagId.from(tagId))
     this._updatedAt = new Date()
   }

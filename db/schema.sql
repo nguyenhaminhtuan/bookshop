@@ -51,7 +51,7 @@ CREATE TABLE "catalog"."categories" (
   "description"   text,
   "image"         text,
   "display_order" integer NOT NULL DEFAULT 0,
-  "parent_id"     uuid NOT NULL,
+  "parent_id"     uuid,
   "created_at"    timestamp NOT NULL DEFAULT now(),
   "updated_at"    timestamp NOT NULL DEFAULT now(),
 
@@ -94,7 +94,7 @@ CREATE TABLE "catalog"."books" (
   "page_count"      integer,
   "cover_material"  text,
   "images"          text[] NOT NULL DEFAULT '{}',
-  "status"          text NOT NULL DEFAULT 'DRAFT' CHECK (status IN ('DRAFT', 'UNPUBLISHED', 'PUBLISHED', 'DISCONTINUED')),
+  "status"          text NOT NULL DEFAULT 'DRAFT' CHECK (status IN ('DRAFT', 'PUBLISHED', 'DISCONTINUED')),
   "published_at"    timestamp,
   "discontinued_at" timestamp,
   "category_id"     uuid NOT NULL,
