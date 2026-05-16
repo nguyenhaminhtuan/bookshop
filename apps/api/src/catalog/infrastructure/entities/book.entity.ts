@@ -1,4 +1,4 @@
-import { defineEntity, p } from '@mikro-orm/core'
+import { defineEntity, p } from '@mikro-orm/postgresql'
 
 import { BookStatus } from '#catalog/domain/enums/book.enums.js'
 import type { DimensionProps, MoneyProps } from '#catalog/domain/value-objects/index.js'
@@ -7,6 +7,7 @@ import { AuthorEntity } from './author.entity.js'
 import { CategoryEntity } from './category.entity.js'
 import { DistributorEntity } from './distributor.entity.js'
 import { PublisherEntity } from './publisher.entity.js'
+import { TagEntity } from './tag.entity.js'
 
 const BookSchema = defineEntity({
   name: 'BookEntity',
@@ -35,7 +36,7 @@ const BookSchema = defineEntity({
         .inverseJoinColumn('author_id'),
     tags: () =>
       p
-        .manyToMany(AuthorEntity)
+        .manyToMany(TagEntity)
         .pivotTable('book_tags')
         .joinColumn('book_id')
         .inverseJoinColumn('tag_id'),

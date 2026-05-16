@@ -11,7 +11,7 @@ const CategoryEntitySchema = defineEntity({
     description: p.string().nullable(),
     image: p.string().nullable(),
     displayOrder: p.smallint(),
-    parent: () => p.manyToOne(CategoryEntity),
+    parent: () => p.manyToOne(CategoryEntity).nullable(),
     createdAt: p.datetime(),
     updatedAt: p.datetime(),
   },
