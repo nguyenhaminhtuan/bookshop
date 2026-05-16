@@ -48,7 +48,7 @@ export class Guard {
     argumentName: string,
     message?: GuardMessage,
   ): asserts value is T[] {
-    if (Array.isArray(value)) {
+    if (!Array.isArray(value)) {
       throw new DomainInvariantError(
         Guard.resolveMessage(message) ?? `${argumentName} must be an array`,
       )
@@ -63,7 +63,7 @@ export class Guard {
     Guard.againstNullOrUndefined(value, argumentName, message)
     Guard.againstNonArray(value, argumentName, message)
 
-    if (value.length > 0) {
+    if (value.length === 0) {
       throw new DomainInvariantError(
         Guard.resolveMessage(message) ?? `${argumentName} must not be empty`,
       )
